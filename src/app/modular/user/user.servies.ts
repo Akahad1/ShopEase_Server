@@ -14,7 +14,22 @@ const LoginUserFromDBFromDB = async (data: any) => {
 
   return user;
 };
+const getUserFromDB = async (data: any) => {
+  const user = await User.findOne({ email: data.email });
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "Invalid email ");
+  }
+
+  return user;
+};
+const getAllUserFromDB = async () => {
+  const user = await User.find();
+
+  return user;
+};
 export const userServices = {
   createUserFromDB,
   LoginUserFromDBFromDB,
+  getUserFromDB,
+  getAllUserFromDB,
 };
